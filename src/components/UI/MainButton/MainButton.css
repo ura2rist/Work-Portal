@@ -1,0 +1,14 @@
+.main__button {
+  padding: 10px 15px;
+  margin-right: 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.main__button {
+  margin-right: 0;
+}
+
+a {
+  color: #000000;
+}
