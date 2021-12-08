@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function NewsItem({ title, content, author, date }) {
+function NewsItem({ title, content, author, date, id }) {
+  const router = useNavigate();
+
   return (
     <article className='news__element'>
       <h1>{ title }</h1>
@@ -14,7 +16,7 @@ function NewsItem({ title, content, author, date }) {
           <span>{ date }</span>
         </div>
         <div>
-        <Link to='/post'>Читать далее...</Link>
+          <span className='news__full' onClick={ () => router(`/news/${id}`) }>Читать далее...</span>
         </div>
       </main>
     </article>

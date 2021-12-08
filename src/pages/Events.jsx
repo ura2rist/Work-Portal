@@ -1,50 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import fetchApi from '../API/fetchApi';
+import EventsItem from '../components/EventsItem';
+import { getPagesArray, getPagesCount } from '../utils/pages';
 
 function Events() {
+  const [ events, setEvents ] = useState([]);
+  const [ totalPages, setTotalPages ] = useState(0);
+  const [ page, setPage ] = useState(1);
+  const pageArray = getPagesArray(totalPages);
+
+  useEffect(() => {
+    fetchApi.getEventsItems(8, page)
+      .then((response) => {
+        const [ resCount, resData ] = response.data;
+        setEvents(resData);
+        setTotalPages(getPagesCount(resCount, 8));
+      })
+  }, [ page ])
+
+  function changePage(page) {
+    setPage(page);
+  }
+
   return (
     <section className='events'>
       <div className='events__list'>
-        <article className='events__element'>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea neque nam voluptate odio excepturi dolore voluptatem illo eius minus itaque, fuga saepe inventore.</p>
-          <span>30.12.2021</span>
-        </article>
-        <article className='events__element'>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea neque nam voluptate odio excepturi dolore voluptatem illo eius minus itaque, fuga saepe inventore.</p>
-          <span>30.12.2021</span>
-        </article>
-        <article className='events__element'>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea neque nam voluptate odio excepturi dolore voluptatem illo eius minus itaque, fuga saepe inventore.</p>
-          <span>30.12.2021</span>
-        </article>
-        <article className='events__element'>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea neque nam voluptate odio excepturi dolore voluptatem illo eius minus itaque, fuga saepe inventore.</p>
-          <span>30.12.2021</span>
-        </article>
-        <article className='events__element'>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea neque nam voluptate odio excepturi dolore voluptatem illo eius minus itaque, fuga saepe inventore.</p>
-          <span>30.12.2021</span>
-        </article>
-        <article className='events__element'>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea neque nam voluptate odio excepturi dolore voluptatem illo eius minus itaque, fuga saepe inventore.</p>
-          <span>30.12.2021</span>
-        </article>
-        <article className='events__element'>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea neque nam voluptate odio excepturi dolore voluptatem illo eius minus itaque, fuga saepe inventore.</p>
-          <span>30.12.2021</span>
-        </article>
+        {
+          events.map(item => 
+            <EventsItem title={ item.title } key={ item.id } content={ item.content } date={ item.date }/>
+          )
+        }
       </div>
       <ul className='pagination'>
-        <li className='pagination__element'>1</li>
-        <li className='pagination__element'>2</li>
-        <li className='pagination__element'>3</li>
-        <li className='pagination__element'>4</li>
+        {
+          pageArray.map(p =>
+            <li onClick={ () => changePage(p) } key={ p } className={ p === page ? 'pagination__element_active pagination__element' : 'pagination__element' }>{ p }</li>
+          )
+        }
       </ul>
     </section>
   );

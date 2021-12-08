@@ -17,7 +17,7 @@ function News() {
         setNews(resData);
         setTotalPages(getPagesCount(resCount));
       })
-  }, [page])
+  }, [ page ])
 
   function changePage(page) {
     setPage(page);
@@ -28,7 +28,7 @@ function News() {
       <div>
         {
           news.map(item => 
-            <NewsItem title={ item.title } key={ item.id } content={ item.content } date={ item.date } author={ item['user.login'] } idAuthor={ item.userId } />
+            <NewsItem title={ item.title } key={ item.id } id={ item.id } content={ item.content } date={ item.date } author={ item['user.login'] } idAuthor={ item.userId } />
           )
         }
       </div>

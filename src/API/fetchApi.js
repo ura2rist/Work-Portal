@@ -19,6 +19,21 @@ class FetchApi {
     })
       .then(response => response)
   }
+
+  getEventsItems(limit = 8, page = 1) {
+    return axios.get(this.ip + 'events', {
+      params: {
+        limit: limit,
+        page: page
+      }
+    })
+      .then(response => response)
+  }
+
+  getByIdNews(id) {
+    return axios.get(this.ip + 'news/' + id)
+      .then(response => response.data)
+  }
 }
 
 const fetchApi = new FetchApi();
