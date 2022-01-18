@@ -12,8 +12,7 @@ function NewsItem({ title, content, author, date, id }) {
           { content }...
         </div>
         <div>
-          <span>{ author }</span>
-          <span>{ date }</span>
+          <p><span>{ author }</span> <span>{ date }</span></p>
         </div>
         <div>
           <span className='news__full' onClick={ () => router(`/news/${id}`) }>Читать далее...</span>

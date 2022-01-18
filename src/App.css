@@ -33,11 +33,12 @@
 
 .directory__sub-menu {
   display: none;
+  flex-direction: column;
 }
 
-.directory__element_active .directory__sub-menu {
+.directory__element:hover > .directory__sub-menu{
   display: flex;
-  flex-direction: column;
+
 }
 
 .directory__element {
@@ -130,5 +131,9 @@
 
 .news__full {
   font-weight: 600;
+  cursor: pointer;
+}
+
+.directory__menu li{
   cursor: pointer;
 }

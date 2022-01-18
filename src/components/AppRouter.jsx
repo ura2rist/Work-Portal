@@ -8,10 +8,11 @@ import NewsIdPage from '../pages/NewsIdPage';
 function AppRouter() {
   return (
     <Routes>
-      <Route exect path="/news" element={ <News /> } />
-      <Route exect path="/news/:id" element={ <NewsIdPage /> } />
+      <Route path="/news" element={ <News /> } />
+      <Route path="/news/:id" element={ <NewsIdPage /> } />
       <Route path="/events" element={ <Events /> } />
       <Route path="/directory" element={ <Directory /> } />
+      <Route path="*" element={ <News /> } />
     </Routes>
   );
 };

@@ -34,6 +34,25 @@ class FetchApi {
     return axios.get(this.ip + 'news/' + id)
       .then(response => response.data)
   }
+
+  getAllCategory() {
+    return axios.get(this.ip + 'directory/category')
+      .then(response => response.data)
+  }
+
+  getCategory(category) {
+    return axios.get(this.ip + 'directory/person')
+      .then(response => response.data)
+  }
+
+  getDirectory(category, subCategory = null) {
+    return axios.get(this.ip + 'directory/people', {
+      params: {
+        category: category,
+        subCategory: subCategory
+      }
+    })
+  }
 }
 
 const fetchApi = new FetchApi();
