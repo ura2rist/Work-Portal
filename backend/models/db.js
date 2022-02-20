@@ -1,4 +1,7 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
+const timezone = require('moment-timezone');
+
 const { db_name, db_user, db_password, db_host } = require('../config');
 const sequelize = new Sequelize(db_name, db_user, db_password, {
   dialect: 'mysql',
@@ -311,12 +314,31 @@ person.belongsToMany(rank, { through: personRank });
 
 sequelize.sync().then(result=>{
   console.log(result);
+  user.findOne({ where: { login: 'admin' } })
+    .then((userFind) => {
+      if(!userFind) {
+        let salt = bcrypt.genSaltSync(10);
+        let password = bcrypt.hashSync('12345', salt);
+        let date = timezone.tz(new Date(), 'Europe/Moscow');
+
+        user.create({
+          login: 'admin',
+          password: password,
+          date: date
+        })
+          .then(res=>{
+            console.log(res);
+          }).catch(err=>console.log(err));
+      }
+    })
+    .catch(err=>console.log(err));
 })
 .catch(err=> console.log(err));
 
 
 module.exports = {
   sequelize,
+  Sequelize,
   menu,
   news,
   person,

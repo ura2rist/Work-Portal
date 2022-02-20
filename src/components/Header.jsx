@@ -9,7 +9,7 @@ function Header() {
         <MainMenu />
       </nav>
       <ul className='account-menu'>
-        <MainButton link="singin">Войти</MainButton>
+        <MainButton link="/admin/signin">Войти</MainButton>
       </ul>
     </header>
   );

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import fetchApi from '../API/fetchApi';
 
-function DirectoryMenu({ setPeople }) {
+function DirectoryMenu({ select, setSelect, ...props }) {
   const [ category, setCategory] = useState([]);
-  const [ select, setSelect ] = useState({category: null, subCategory: null});
 
   useEffect(() => {
     fetchApi.getAllCategory()
@@ -16,7 +15,7 @@ function DirectoryMenu({ setPeople }) {
     if(select.category){
       fetchApi.getDirectory(select.category, select.subCategory)
         .then((response) => {
-          console.log(response)
+          props.setPeople(response)
         })
     }
   }, [ select ])
