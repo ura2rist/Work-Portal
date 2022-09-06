@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const models = require('../models');
 const cors = require('cors');
+const { map } = require('lodash');
 const Op = models.db.Sequelize.Op;
 
 router.get('/category', cors(), (request, response, next) => {
@@ -40,10 +41,9 @@ router.get('/category', cors(), (request, response, next) => {
   .catch(err=>console.log(err));
 });
 
-router.get('/search', cors(), (request, response, next) => {
-  let statusSearch = request.query.allSearch;
-  let data = request.query.data;
-
+router.post('/search', (request, response, next) => {
+  let statusSearch = request.body.allSearch;
+  let data = request.body.data.toLowerCase();
   if(statusSearch) {
     models.db.employe.findAll({
       order: [['position', 'ASC']],
@@ -102,7 +102,7 @@ router.get('/search', cors(), (request, response, next) => {
         });
   
         result = result.filter(function(item){
-          return item.name.includes(data) || item.phone.includes(data) || item.mainPhone.includes(data);
+          return item.name.toLowerCase().includes(data) || item.phone.includes(data) || item.mainPhone.includes(data);
         })
         
         result = result.reduce((accum, current) => {
@@ -168,11 +168,11 @@ router.get('/search', cors(), (request, response, next) => {
       order: [['position', 'ASC']],
       include: [{
         model: models.db.categorySubcategory,
+        where: {
+          categoryId: request.body.category
+        },
         include: [{
-          model: models.db.category,
-          where: {
-            id: request.query.category
-          }
+          model: models.db.category
         },
         {
           model: models.db.subCategory
@@ -199,6 +199,7 @@ router.get('/search', cors(), (request, response, next) => {
           response.json(false);
           return;
         }
+
         let result = [];
         people.map((item) => {
           result.push({
@@ -224,7 +225,7 @@ router.get('/search', cors(), (request, response, next) => {
         });
   
         result = result.filter(function(item){
-          return item.name.includes(data) || item.phone.includes(data) || item.mainPhone.includes(data);
+          return item.name.toLowerCase().includes(data) || item.phone.includes(data) || item.mainPhone.includes(data);
         })
         
         result = result.reduce((accum, current) => {

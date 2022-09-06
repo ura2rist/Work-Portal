@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react';
-import fetchApi from '../API/fetchApi';
+import React, { useContext, useEffect, useState } from 'react';
+import { Context } from '../index';
 
 function Signin() {
-  function auth(e) {
-    e.preventDefault();
-    let login = e.target.login.value;
-    let password = e.target.password.value;
-
-    if(login.length > 0 && password.length > 0) {
-      fetchApi.authSignIn(login, password)
-        .then((response) => {
-          console.log(response)
-        })
-    }
-  }
+  const [ login, setLogin ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const { store } = useContext(Context);
 
   return (
     <div>
-      <form onSubmit={ (e) => auth(e) }>
-        <input type="text" name="login" />
-        <input type="password" name="password" />
-        <input type="submit" value="Войти" />
-      </form>
+        <input type="text" name="login" onChange={ e => setLogin(e.target.value) } value={ login } />
+        <input type="password" name="password" onChange={ e => setPassword(e.target.value) } value={ password } />
+        <button onClick = { () => store.login(login, password) }>Войти</button>
     </div>
   );
 }

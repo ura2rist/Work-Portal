@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Panel from './Panel';
 import Signin from './Signin';
-import fetchApi from '../API/fetchApi';
+import { Context } from '../index';
+import { observer } from 'mobx-react-lite';
+import UserService from '../services/UserService';
 
 function Admin() {
-  let [adminStatus, setAdminStatus] = useState(false);
-
-  useEffect(() => {
-    fetchApi.authCheck()
-      .then((response) => {
-        console.log(response)
-      })
-  }, []);
+  const { store } = useContext(Context);
 
   return (
     <section>
-      { !adminStatus ? <Signin setAdminStatus={ setAdminStatus } /> : <Panel setAdminStatus={ setAdminStatus } /> }
+      { !store.isAuth ? <Signin /> : <Panel /> }
     </section>
   )
 }
 
-export default Admin;
+export default observer(Admin);

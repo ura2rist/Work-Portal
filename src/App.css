@@ -137,3 +137,15 @@
 .directory__menu li{
   cursor: pointer;
 }
+
+.navAdmin {
+  display: flex;
+}
+
+.navAdmin li {
+  margin-right: 30px;
+}
+
+.navAdmin li:last-child {
+  margin-right: 0;
+}
