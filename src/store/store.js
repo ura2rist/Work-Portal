@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import AuthService from '../services/AuthService';
 import axios from 'axios';
-import $api from "../http";
+import $api from '../http';
 import UserService from '../services/UserService';
 
 export default class Store {
@@ -27,7 +27,7 @@ export default class Store {
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -38,7 +38,7 @@ export default class Store {
       this.setAuth(false);
       this.setUser({});
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -49,7 +49,7 @@ export default class Store {
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -57,7 +57,7 @@ export default class Store {
     try {
       const response = await UserService.addUser(login, password);
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -67,7 +67,7 @@ export default class Store {
 
       return response;
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -77,7 +77,7 @@ export default class Store {
 
       return response;
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -87,7 +87,7 @@ export default class Store {
 
       return response;
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -97,7 +97,7 @@ export default class Store {
 
       return response;
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
     }
   }
 
@@ -107,7 +107,25 @@ export default class Store {
 
       return response;
     } catch (e) {
-      console.log(e.response?.data?.message)
+      console.log(e.response?.data?.message);
+    }
+  }
+
+  async removeNews(id) {
+    try {
+      const response = await UserService.removeNews(id);
+
+      return response;
+    } catch (e) {
+      console.log(e.response?.data?.message);
+    }
+  }
+
+  async getAccountId(token) {
+    try {
+      // получение id аккаунта
+    } catch (e) {
+      console.log(e.response?.data?.message);
     }
   }
 }

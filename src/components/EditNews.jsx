@@ -1,45 +1,90 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import NewsItemEdit from '../components/NewsItemEdit';
 import fetchApi from '../API/fetchApi';
-import { getPagesCount, getPagesArray } from '../utils/pages'
+import Modal from './modal/Modal';
+import { Context } from '../index';
+import { getPagesCount, getPagesArray } from '../utils/pages';
 
 function EditNews() {
-  const [ news, setNews ] = useState([]);
-  const [ totalPages, setTotalPages ] = useState(0);
-  const [ page, setPage ] = useState(1);
+  const { store } = useContext(Context);
+  const [news, setNews] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+  const [modalActive, setModalActive] = useState(false);
   let pageArray = getPagesArray(totalPages);
+  const [newTitle, setNewTitle] = useState('');
+  const [newContent, setNewContent] = useState('');
+  const [account, setAccount] = useState(0);
 
-  useEffect(()=>{
-    fetchApi.getNewsItems(10, page)
-      .then((response) => {
-        const [ resCount, resData ] = response.data;
-        setNews(resData);
-        setTotalPages(getPagesCount(resCount));
-      })
-  }, [ page ])
+  useEffect(() => {
+    allNews();
+  }, [page]);
+
+  function allNews() {
+    setAccount(store.getAccountId(localStorage.getItem('token')));
+
+    fetchApi.getNewsItems(10, page).then((response) => {
+      const [resCount, resData] = response.data;
+      setNews(resData);
+      setTotalPages(getPagesCount(resCount));
+    });
+  }
 
   function changePage(page) {
     setPage(page);
   }
 
+  function addNews(event) {
+    setModalActive(true);
+  }
+
   return (
     <div>
+      <button onClick={(event) => addNews(event)}>Добавить новость</button>
       <div>
-        {
-          news.map(item => 
-            <NewsItemEdit title={ item.title } key={ item.id } id={ item.id } content={ item.content } date={ item.date } author={ item['user.login'] } idAuthor={ item.userId } />
-          )
-        }
+        {news.map((item) => (
+          <NewsItemEdit
+            allNews={allNews}
+            title={item.title}
+            key={item.id}
+            id={item.id}
+            content={item.content}
+            date={item.date}
+            author={item['user.login']}
+            idAuthor={item.userId}
+          />
+        ))}
       </div>
       <ul className='pagination'>
-        {
-          pageArray.map(p =>
-            <li onClick={ () => changePage(p) } key={ p } className={ p === page ? 'pagination__element_active pagination__element' : 'pagination__element' }>{ p }</li>
-          )
-        }
+        {pageArray.map((p) => (
+          <li
+            onClick={() => changePage(p)}
+            key={p}
+            className={p === page ? 'pagination__element_active pagination__element' : 'pagination__element'}
+          >
+            {p}
+          </li>
+        ))}
       </ul>
+      <Modal active={modalActive} setActive={setModalActive}>
+        <input
+          placeholder='Заголовок'
+          type='text'
+          name='title'
+          value={newTitle}
+          onChange={(event) => setNewTitle(event.target.value)}
+        />
+        <input
+          placeholder='Контент'
+          type='text'
+          name='text'
+          value={newContent}
+          onChange={(event) => setNewContent(event.target.value)}
+        />
+        <button>Сохранить</button>
+      </Modal>
     </div>
-  )
+  );
 }
 
 export default EditNews;
