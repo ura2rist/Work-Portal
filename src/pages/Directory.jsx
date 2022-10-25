@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DirectoryMenu from '../components/DirectoryMenu';
 import DirectorySearch from '../components/DirectorySearch';
 import DirectoryTable from '../components/DirectoryTable';

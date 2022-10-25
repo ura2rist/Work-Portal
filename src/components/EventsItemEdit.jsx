@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../index';
 
-function NewsItem({ allNews, title, content, author, date, id }) {
+function EventsItem({ allEvents, title, content, author, date, id }) {
   const router = useNavigate();
   const { store } = useContext(Context);
 
-  async function removeNews() {
-    await store.removeNews(id);
+  async function removeEvent() {
+    await store.removeEvent(id);
 
-    await allNews();
+    await allEvents();
   }
 
   return (
@@ -23,11 +23,11 @@ function NewsItem({ allNews, title, content, author, date, id }) {
           </p>
         </div>
         <div>
-          <span className='news__full' onClick={() => router(`/admin/signin/newsEdit/${id}`)}>
+          <span className='news__full' onClick={() => router(`/admin/signin/eventEdit/${id}`)}>
             Редактировать
           </span>
           <br></br>
-          <span className='news__full' onClick={() => removeNews()}>
+          <span className='news__full' onClick={() => removeEvent()}>
             Удалить
           </span>
         </div>
@@ -36,4 +36,4 @@ function NewsItem({ allNews, title, content, author, date, id }) {
   );
 }
 
-export default NewsItem;
+export default EventsItem;

@@ -24,4 +24,19 @@ router.get('/', cors(), (request, response, next) => {
     .catch(err=>console.log(err));
 });
 
+router.get('/:id', cors(), (request, response, next) => {
+  models.db.events.findOne({
+    where: {
+      id: request.params.id
+    }
+  })
+  .then((news) => {
+    let date = new Date(news.date);
+    news = news.toJSON();
+    news.date = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getUTCHours()}:${date.getMinutes()}`;
+    response.json(news)
+  })
+  .catch(err=>console.log(err))
+});
+
 module.exports = router;

@@ -3,14 +3,14 @@ import { Context } from '../index';
 import Modal from './modal/Modal';
 
 function Users() {
-  let [user, setUser] = useState('');
-  let [password, setPassword] = useState('');
-  let [users, setUsers] = useState([]);
-  let [modalActive, setModalActive] = useState(false);
-  let [editUser, setEditUser] = useState();
-  let [newPassword, setNewPassword] = useState('');
-  let [newLogin, setNewLogin] = useState('');
-  let [newFio, setNewFio] = useState('');
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+  const [users, setUsers] = useState([]);
+  const [modalActive, setModalActive] = useState(false);
+  const [editUser, setEditUser] = useState();
+  const [newPassword, setNewPassword] = useState('');
+  const [newLogin, setNewLogin] = useState('');
+  const [newFio, setNewFio] = useState('');
   const { store } = useContext(Context);
 
   function getUsers() {

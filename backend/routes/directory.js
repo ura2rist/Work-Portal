@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const models = require('../models');
 const cors = require('cors');
-const { map } = require('lodash');
-const Op = models.db.Sequelize.Op;
 
 router.get('/category', cors(), (request, response, next) => {
   models.db.category.findAll({
@@ -20,6 +18,7 @@ router.get('/category', cors(), (request, response, next) => {
         let content = {
           id: item.id,
           category: item.category,
+          position: item.position,
           subCategories: []
         }
 
@@ -332,6 +331,7 @@ router.get('/people', cors(), (request, response, next) => {
       let result = [];
       people.map((item) => {
         result.push({
+          employeId: item.id,
           id: item.personRank.person.id,
           name: item.personRank.person.fullName,
           rank: item.personRank.rank.rank,
@@ -380,14 +380,15 @@ router.get('/people', cors(), (request, response, next) => {
                   phone: current.phone,
                   mainPhone: current.mainPhone,
                   description: current.description,
-                  pos: current.position
+                  pos: current.position,
+                  employe: current.employeId
                 }
               ]
             })
           } else if (item.category === category && item.subCategory.some(sub => sub.name === subCategory)) {
               accum[index].subCategory.map((item, indexSub) => {
                 if(accum[index].subCategory[indexSub].name === subCategory) {
-                  accum[index].subCategory[indexSub].data.push({id: current.id, name: current.name, rank: current.rank, phone: current.phone, mainPhone: current.mainPhone, description: current.description, pos: current.position})
+                  accum[index].subCategory[indexSub].data.push({id: current.id, name: current.name, rank: current.rank, phone: current.phone, mainPhone: current.mainPhone, description: current.description, pos: current.position, employe: current.employeId})
                 }
               })
           }
@@ -498,6 +499,7 @@ router.get('/people', cors(), (request, response, next) => {
                   phone: current.phone,
                   mainPhone: current.mainPhone,
                   description: current.description,
+                  employe: current.employeId,
                   pos: current.position
                 }
               ]
@@ -505,7 +507,7 @@ router.get('/people', cors(), (request, response, next) => {
           } else if (item.category === category && item.subCategory.some(sub => sub.name === subCategory)) {
               accum[index].subCategory.map((item, indexSub) => {
                 if(accum[index].subCategory[indexSub].name === subCategory) {
-                  accum[index].subCategory[indexSub].data.push({id: current.id, name: current.name, rank: current.rank, phone: current.phone, mainPhone: current.mainPhone, description: current.description, pos: current.position})
+                  accum[index].subCategory[indexSub].data.push({id: current.id, name: current.name, rank: current.rank, phone: current.phone, mainPhone: current.mainPhone, description: current.description, pos: current.position, employe: current.employeId})
                 }
               })
           }
@@ -526,10 +528,27 @@ router.get('/people', cors(), (request, response, next) => {
         })
       });
 
-      response.json(result)
+      response.json(result);
     })
     .catch(err => console.log(err));
   }
 });
+
+router.post('/subcategory', (request, response, next) => {
+  const { id } = request.body;
+
+  models.db.category.findOne({
+    order: [['position', 'ASC']],
+    where: {
+      id: id
+    },
+    include: {
+      model: models.db.subCategory
+    }
+  }).then((result) => {
+    response.json(result.subCategories);
+  })
+  .catch(err => console.log(err));
+})
 
 module.exports = router;

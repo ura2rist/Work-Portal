@@ -14,20 +14,30 @@ function EditNews() {
   let pageArray = getPagesArray(totalPages);
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
-  const [account, setAccount] = useState(0);
 
   useEffect(() => {
     allNews();
   }, [page]);
 
   function allNews() {
-    setAccount(store.getAccountId(localStorage.getItem('token')));
-
     fetchApi.getNewsItems(10, page).then((response) => {
       const [resCount, resData] = response.data;
       setNews(resData);
       setTotalPages(getPagesCount(resCount));
     });
+  }
+
+  function addNewsPost(title, content) {
+    const response = store.addNewsPost(title, content, localStorage.getItem('id'));
+
+    response.then((item)=> {
+      allNews();
+
+      setModalActive(false);
+
+      setNewTitle('');
+      setNewContent('');
+    })
   }
 
   function changePage(page) {
@@ -81,7 +91,7 @@ function EditNews() {
           value={newContent}
           onChange={(event) => setNewContent(event.target.value)}
         />
-        <button>Сохранить</button>
+        <button onClick={() => addNewsPost(newTitle, newContent)}>Сохранить</button>
       </Modal>
     </div>
   );

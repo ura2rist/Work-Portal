@@ -22,7 +22,7 @@ function DirectoryTable({ people }) {
                 <tbody>
                   {
                     subCategory.data.map(data =>
-                      <tr key={ data }>
+                      <tr key={ data.id }>
                         <td>{ data.name }</td>
                         <td>{ data.rank }</td>
                         <td>{ data.phone }</td>
