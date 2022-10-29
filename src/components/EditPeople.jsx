@@ -3,6 +3,7 @@ import fetchApi from '../API/fetchApi';
 import Modal from './modal/Modal';
 import { Context } from '../index';
 import PeopleEditElement from './PeopleEditElement';
+import './EditPeople.css';
 
 function EditPeople() {
   const { store } = useContext(Context);
@@ -111,14 +112,14 @@ function EditPeople() {
         </select>
       )}
       {subCategory.length > 0 && (
-        <div>
-          <div>
-            <p>Формат ввода: ФИО:Должность:Внешний телефон:Внутренний телефон:Описание;</p>
+        <div className='editPeople'>
+          <div className='editPeople__wrapp-add'>
+            <p className='editPeople__description'>Формат ввода: ФИО:Должность:Внешний телефон:Внутренний телефон:Описание;</p>
             <textarea name="" id="" cols="30" rows="10" value={ text } onChange={ (event) => setText(event.currentTarget.value) } />
             <button onClick={ () => addPeople() }>Добавить</button>
           </div>
           <div>
-            <ul>
+            <ul className='editPeople__list'>
               {people.map((item) => (
                   <PeopleEditElement key={ item.id } getInfo={ getInfo } setModalActive={ setModalActive } employe={ item.employe } data={ item } getPeople={ getPeople } category={ selectCat } subCategory={ selectSubCat }/>
               ))}
@@ -126,6 +127,7 @@ function EditPeople() {
           </div>
           <Modal active={modalActive} setActive={setModalActive}>
             <input
+              className='modal__input'
               placeholder='ФИО'
               type='text'
               name='fio'
@@ -133,6 +135,7 @@ function EditPeople() {
               onChange={(event) => setFio(event.target.value)}
             />
             <input
+              className='modal__input'
               placeholder='Должность'
               type='text'
               name='rank'
@@ -140,6 +143,7 @@ function EditPeople() {
               onChange={(event) => setRank(event.target.value)}
             />
             <input
+              className='modal__input'
               placeholder='Внешний телефон'
               type='text'
               name='phone'
@@ -147,6 +151,7 @@ function EditPeople() {
               onChange={(event) => setPhone(event.target.value)}
             />
             <input
+              className='modal__input'
               placeholder='Внутренний телефон'
               type='text'
               name='mainPhone'
@@ -154,6 +159,7 @@ function EditPeople() {
               onChange={(event) => setMainPhone(event.target.value)}
             />
             <input
+              className='modal__input'
               placeholder='Описание'
               type='text'
               name='description'
@@ -161,13 +167,14 @@ function EditPeople() {
               onChange={(event) => setDescription(event.target.value)}
             />
             <input
+              className='modal__input'
               placeholder='Позиция'
               type='number'
               name='position'
               value={position}
               onChange={(event) => setPosition(event.target.value)}
             />
-            <button onClick={() => editPeople()}>Сохранить</button>
+            <button className='modal__button' onClick={() => editPeople()}>Сохранить</button>
           </Modal>
         </div>
       )}

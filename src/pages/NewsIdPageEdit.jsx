@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import fetchApi from '../API/fetchApi';
 import { Context } from '../index';
+import './NewsIdPageEdit.css';
 
 function NewsIdPageEdit() {
   const params = useParams();
@@ -37,30 +38,32 @@ function NewsIdPageEdit() {
   }, [params.id]);
   
   return (
-    <div>
-      <input type="text" value={ title } onChange={(event) => setTitle(event.target.value)}/>
-      <div>
-        <textarea value={ content } onChange={(event) => setContent(event.target.value)}></textarea>
+    <div className='wrapper'>
+      <div className='editNews'>
+        <input className='editNews__title' type="text" value={ title } onChange={(event) => setTitle(event.target.value)}/>
+        <div>
+          <textarea className='editNews__content' value={ content } onChange={(event) => setContent(event.target.value)}></textarea>
+        </div>
+        <div>
+          <p>
+            <span>Автор: </span>
+            <select value={ author } onChange={ (event) => setAuthor(event.currentTarget.value) }>
+                <option value=''>Ничего</option>
+              { users.map((item) =>
+                <option 
+                  key={ item.id } 
+                  value={ item.login }
+                  >
+                  { item.login }
+                </option>
+              ) }
+            </select>
+          </p>
+          <p><span>Дата публикации: </span>{ newsItem?.date }</p>
+        </div>
+        <button className='editNews__save' onClick={ () => saveNews() }>Сохранить</button>
+        { status && <h2>Сохранено</h2> }
       </div>
-      <div>
-        <p>
-          <span>Автор: </span>
-          <select value={ author } onChange={ (event) => setAuthor(event.currentTarget.value) }>
-              <option value=''>Ничего</option>
-            { users.map((item) =>
-              <option 
-                key={ item.id } 
-                value={ item.login }
-                >
-                { item.login }
-              </option>
-            ) }
-          </select>
-        </p>
-        <p><span>Дата публикации: </span>{ newsItem?.date }</p>
-      </div>
-      <button onClick={ () => saveNews() }>Сохранить</button>
-      { status && <h2>Сохранено</h2> }
     </div>
   );
 }

@@ -1,0 +1,20 @@
+.navAdmin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.navAdmin li {
+  margin-right: 30px;
+}
+
+.navAdmin li:last-child {
+  margin-right: 0;
+}
+
+.navAdmin a {
+  color: #000000;
+}

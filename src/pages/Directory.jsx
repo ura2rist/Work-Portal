@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DirectoryMenu from '../components/DirectoryMenu';
 import DirectorySearch from '../components/DirectorySearch';
 import DirectoryTable from '../components/DirectoryTable';
+import './Directory.css';
 
 function Directory() {
   const [ people, setPeople ] = useState([]);
@@ -9,12 +10,10 @@ function Directory() {
 
   return (
     <section className='directory'>
-      <section className='directory__category'>
         <DirectoryMenu setPeople={ setPeople } select={ select } setSelect={ setSelect } />
-      </section>
       <section className='directory__content'>
         <DirectorySearch setPeople={ setPeople } select={ select }/>
-        { people && people.length != 0 ? <DirectoryTable people={ people }/> : <p>Выберите категорию</p> }
+        { people && people.length != 0 ? <DirectoryTable people={ people }/> : <p className='directory__message'>Выберите категорию</p> }
       </section>
     </section>
   );

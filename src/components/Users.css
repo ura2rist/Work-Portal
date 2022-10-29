@@ -1,0 +1,25 @@
+.addUser__input,
+.addUser__button {
+  padding: 5px 10px;
+  margin-right: 20px;
+}
+
+.addUser__new {
+  margin-bottom: 20px;
+}
+
+.addUser__search {
+  margin-bottom: 20px;
+}
+
+.addUser__user {
+  margin-bottom: 10px;
+}
+
+.addUser__user:last-child {
+  margin-bottom: 0;
+}
+
+.addUser__button-edit {
+  padding: 5px 10px;
+}

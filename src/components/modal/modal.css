@@ -19,7 +19,20 @@
 }
 
 .modal__content {
+  display: flex;
+  max-width: 300px;
+  width: 100%;
+  gap: 10px;
+  flex-direction: column;
   padding: 20px;
   border-radius: 15px;
   background-color: white;
+}
+
+.modal__input {
+  padding: 5px 10px;
+}
+
+.modal__button {
+  padding: 5px 10px;
 }

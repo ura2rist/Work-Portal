@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import fetchApi from '../API/fetchApi';
 import Modal from './modal/Modal';
 import { Context } from '../index';
+import './EditSubCategory.css';
 
 function EditSubCategory() {
   const { store } = useContext(Context);
@@ -64,18 +65,18 @@ function EditSubCategory() {
 
   return (
     <div>
-      <ul className='directory__menu'>
+      <ul className='editSubCat'>
       { 
         category.map(item =>
           item.subCategories ? 
-            <li key={ item.id }>
-              { item.category }<button onClick={ () => {
+            <li key={ item.id } className='editSubCat__cat'> 
+              { item.category }<button className='panel-add' onClick={ () => {
                 callModal();
                 setCategoryId(item.id);
               } }>Добавить подкатегорию</button>
               <ul>
                 {
-                  item.subCategories.map((sub) => <li key={ sub.id }>{ sub.category } : { sub.position }<button onClick={ () => callModalEdit(sub.id, sub.category, sub.position, item.id ) }>Редактировать</button><button onClick={ () => removeSubCategory(item.id, sub.id) }>Удалить</button></li>)
+                  item.subCategories.map((sub) => <li key={ sub.id } className='editSubCat__subCat'>{ sub.category } : { sub.position }<button onClick={ () => callModalEdit(sub.id, sub.category, sub.position, item.id ) }>Редактировать</button><button onClick={ () => removeSubCategory(item.id, sub.id) }>Удалить</button></li>)
                 }
               </ul>
             </li>
@@ -85,16 +86,18 @@ function EditSubCategory() {
       </ul>
       <Modal active={modalActive} setActive={setModalActive}>
         <input
+          className='modal__input'
           placeholder='Подкатегория'
           type='text'
           name='subcat'
           value={newSubCat}
           onChange={(event) => setSubCat(event.target.value)}
         />
-        <button onClick={() => addSubCategory()}>Добавить</button>
+        <button className='modal__button' onClick={() => addSubCategory()}>Добавить</button>
       </Modal>
       <Modal active={modalActiveEdit} setActive={setModalActiveEdit}>
-      <input
+        <input
+          className='modal__input'
           placeholder='Новый заголовок'
           type='text'
           name='title'
@@ -102,13 +105,14 @@ function EditSubCategory() {
           onChange={(event) => setTitleCat(event.target.value)}
         />
         <input
+          className='modal__input'
           placeholder='Позиция'
           type='text'
           name='position'
           value={positionCat}
           onChange={(event) => setPositionCat(event.target.value)}
         />
-        <button onClick={() => changeSubCategory()}>Изменить</button>
+        <button className='modal__button' onClick={() => changeSubCategory()}>Изменить</button>
       </Modal>
     </div>
   );

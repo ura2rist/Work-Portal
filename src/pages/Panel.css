@@ -1,0 +1,9 @@
+.signout {
+  margin-left: auto;
+  display: block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #cdcdcd;
+}

@@ -50,7 +50,7 @@ function EditEvents() {
 
   return (
       <div>
-        <button onClick={(event) => addEvents(event)}>Добавить событие</button>
+        <button className='panel-add' onClick={(event) => addEvents(event)}>Добавить событие</button>
         <div>
           {news.map((item) => (
             <EventsItemEdit
@@ -78,6 +78,7 @@ function EditEvents() {
         </ul>
         <Modal active={modalActive} setActive={setModalActive}>
           <input
+            className='modal__input'
             placeholder='Заголовок'
             type='text'
             name='title'
@@ -85,13 +86,14 @@ function EditEvents() {
             onChange={(event) => setEventsTitle(event.target.value)}
           />
           <input
+            className='modal__input'
             placeholder='Контент'
             type='text'
             name='text'
             value={eventContent}
             onChange={(event) => setEventsContent(event.target.value)}
           />
-          <button onClick={() => addEventPost(eventTitle, eventContent)}>Сохранить</button>
+          <button className='modal__button' onClick={() => addEventPost(eventTitle, eventContent)}>Сохранить</button>
         </Modal>
       </div>
     );

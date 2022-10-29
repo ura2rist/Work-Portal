@@ -1,0 +1,46 @@
+.directory {
+  display: flex;
+  min-height: 95vh;
+  border-top: 1px solid #cdcdcd;
+}
+
+.directory__category {
+  flex-basis: 25%;
+  border-right: 1px solid #cdcdcd;
+}
+
+
+.directory__content {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 75%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.directory__message {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .directory {
+    display: block;
+    min-height: auto;
+  }
+
+  .directory__category {
+    flex-basis: 100%;
+    border-right: none;
+  }
+
+  .directory__content {
+    flex-basis: 100%;
+  }
+
+  .directory__message {
+    font-size: 18px;
+  }
+}

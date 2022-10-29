@@ -1,0 +1,16 @@
+.editPeople__description {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.editPeople__wrapp-add {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.editPeople__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

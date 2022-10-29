@@ -3,7 +3,6 @@ import NewsItem from '../components/NewsItem';
 import fetchApi from '../API/fetchApi';
 import { getPagesCount, getPagesArray } from '../utils/pages'
 
-
 function News() {
   const [ news, setNews ] = useState([]);
   const [ totalPages, setTotalPages ] = useState(0);
@@ -25,20 +24,22 @@ function News() {
 
   return (
     <section className='news'>
-      <div>
-        {
-          news.map(item => 
-            <NewsItem title={ item.title } key={ item.id } id={ item.id } content={ item.content } date={ item.date } author={ item['user.login'] } idAuthor={ item.userId } />
-          )
-        }
+      <div className="wrapper">
+        <div>
+          {
+            news.map(item => 
+              <NewsItem title={ item.title } key={ item.id } id={ item.id } content={ item.content } date={ item.date } author={ item['user.login'] } idAuthor={ item.userId } />
+            )
+          }
+        </div>
+        <ul className='pagination'>
+          {
+            pageArray.map(p =>
+              <li onClick={ () => changePage(p) } key={ p } className={ p === page ? 'pagination__element_active pagination__element' : 'pagination__element' }>{ p }</li>
+            )
+          }
+        </ul>
       </div>
-      <ul className='pagination'>
-        {
-          pageArray.map(p =>
-            <li onClick={ () => changePage(p) } key={ p } className={ p === page ? 'pagination__element_active pagination__element' : 'pagination__element' }>{ p }</li>
-          )
-        }
-      </ul>
     </section>
   );
 };

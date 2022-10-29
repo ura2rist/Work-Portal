@@ -50,7 +50,7 @@ function EditNews() {
 
   return (
     <div>
-      <button onClick={(event) => addNews(event)}>Добавить новость</button>
+      <button className='panel-add' onClick={(event) => addNews(event)}>Добавить новость</button>
       <div>
         {news.map((item) => (
           <NewsItemEdit
@@ -78,6 +78,7 @@ function EditNews() {
       </ul>
       <Modal active={modalActive} setActive={setModalActive}>
         <input
+          className='modal__input'
           placeholder='Заголовок'
           type='text'
           name='title'
@@ -85,13 +86,14 @@ function EditNews() {
           onChange={(event) => setNewTitle(event.target.value)}
         />
         <input
+          className='modal__input'
           placeholder='Контент'
           type='text'
           name='text'
           value={newContent}
           onChange={(event) => setNewContent(event.target.value)}
         />
-        <button onClick={() => addNewsPost(newTitle, newContent)}>Сохранить</button>
+        <button className='modal__button' onClick={() => addNewsPost(newTitle, newContent)}>Сохранить</button>
       </Modal>
     </div>
   );

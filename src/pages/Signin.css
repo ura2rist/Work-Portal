@@ -1,0 +1,16 @@
+.signin {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: auto auto;
+}
+
+.signin__input {
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+
+.signin__enter {
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}

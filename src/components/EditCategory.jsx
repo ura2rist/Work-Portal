@@ -40,7 +40,7 @@ function EditCategory() {
 
   return (
     <div>
-      <button onClick={ () => addCategoryModal() }>Добавить категорию</button>
+      <button className='panel-add' onClick={ () => addCategoryModal() }>Добавить категорию</button>
       <div>
         {category.map((item) => (
           <CategoryItemEdit 
@@ -54,13 +54,14 @@ function EditCategory() {
       </div>
       <Modal active={modalActive} setActive={setModalActive}>
           <input
+            className='modal__input'
             placeholder='Заголовок'
             type='text'
             name='title'
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
-          <button onClick={() => addCategory(name)}>Сохранить</button>
+          <button className='modal__button' onClick={() => addCategory(name)}>Сохранить</button>
         </Modal>
     </div>
   );

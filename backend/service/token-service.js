@@ -34,23 +34,23 @@ class TokenService {
   }
 
   async saveToken(userId, refreshToken) {
-    model.token.token.update({ token: refreshToken }, {
-      where: {
-        userId: userId
-      }
-    })
-    .then((token) => {
-      if(token.length > 0) {
-        model.token.token.create({ userId: userId, token: refreshToken })
-          .then((createToken) => {
-            return createToken;
-          })
-          .catch(err=>console.log(err));
-      } else {
-        return token;
-      }
-    })
-    .catch(err=>console.log(err));
+    const token = await model.token.token.findOne({where: { userId: userId }});
+
+    if(token) {
+      model.token.token.update({ token: refreshToken }, {
+        where: {
+          userId: userId
+        }
+      }).then((response) => {
+        return response;
+      })
+    } else {
+      model.token.token.create({ userId: userId, token: refreshToken })
+      .then((createToken) => {
+        return createToken;
+      })
+      .catch(err=>console.log(err));
+    }
   }
 
   async removeToken(refreshToken) {

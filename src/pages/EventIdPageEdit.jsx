@@ -37,15 +37,15 @@ function NewsIdPageEdit() {
   }, [params.id]);
   
   return (
-    <div>
-      <input type="text" value={ title } onChange={(event) => setTitle(event.target.value)}/>
+    <div className='wrapper'>
+      <input className='editNews__title' type="text" value={ title } onChange={(event) => setTitle(event.target.value)}/>
       <div>
-        <textarea value={ content } onChange={(event) => setContent(event.target.value)}></textarea>
+        <textarea className='editNews__content' value={ content } onChange={(event) => setContent(event.target.value)}></textarea>
       </div>
       <div>
         <p><span>Дата публикации: </span>{ newsItem?.date }</p>
       </div>
-      <button onClick={ () => saveEvent() }>Сохранить</button>
+      <button className='editNews__save' onClick={ () => saveEvent() }>Сохранить</button>
       { status && <h2>Сохранено</h2> }
     </div>
   );

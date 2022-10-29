@@ -35,6 +35,7 @@ function CategoryItemEdit({ name: title, position, id, allCategory }) {
       <button onClick={ () => removeCategory(id) }>Удалить</button>
       <Modal active={modalActive} setActive={setModalActive}>
         <input
+          className='modal__input'
           placeholder='Новый заголовок'
           type='text'
           name='title'
@@ -42,13 +43,14 @@ function CategoryItemEdit({ name: title, position, id, allCategory }) {
           onChange={(event) => setTitleCat(event.target.value)}
         />
         <input
+          className='modal__input'
           placeholder='Позиция'
           type='text'
           name='position'
           value={positionCat}
           onChange={(event) => setPositionCat(event.target.value)}
         />
-        <button onClick={() => changeCategory(id, titleCat, positionCat)}>Изменить</button>
+        <button className='modal__button' onClick={() => changeCategory(id, titleCat, positionCat)}>Изменить</button>
       </Modal>
     </article>
   )

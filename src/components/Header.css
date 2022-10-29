@@ -1,0 +1,21 @@
+.header {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000000;
+}
+
+.header .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.account-menu {
+  margin-left: auto;
+}
+
+@media screen and (max-width: 520px) {
+  .header .wrapper {
+    flex-direction: column-reverse;
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import fetchApi from '../API/fetchApi';
+import './DirectorySearch.css';
 
 function DirectorySearch({ setPeople, ...props }) {
   function search(e) {
@@ -25,9 +26,11 @@ function DirectorySearch({ setPeople, ...props }) {
 
   return (
     <form action="" className="directory__form" onSubmit={ (e) => search(e) }>
-      <input type="text" placeholder="Поиск" name="search" className="directory__search"/>
-      <input type='submit' className='directory__button' value='Поиск'/>
-      <div style={{width: '80%'}}>
+      <div className='directory__input'>
+        <input type="text" placeholder="Поиск" name="search" className="directory__search"/>
+        <input type='submit' className='directory__button' value='Поиск'/>
+      </div>
+      <div className='directory__radio'>
         <input type="radio" id="searchChoice1" name="searchRange" value="all" defaultChecked/>
         <label htmlFor="searchChoice1">Везде</label>
         <input type="radio" id="searchChoice2" name="searchRange" value="this"/>
