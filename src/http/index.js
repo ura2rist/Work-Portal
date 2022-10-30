@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const ADMIN_URL = 'https://94.228.124.130:433/admin/';
+export const ADMIN_URL = 'http://94.228.124.130:433/admin/';
 
 const $api = axios.create({
   withCredentials: true,

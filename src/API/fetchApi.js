@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class FetchApi {
   constructor() {
-    this.ip = 'https://94.228.124.130:433/api/';
+    this.ip = 'http://94.228.124.130:433/api/';
   }
 
   getMenuItems() {

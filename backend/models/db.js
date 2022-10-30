@@ -400,17 +400,17 @@ sequelize
               title: 'Новости',
               link: 'news',
               position: 10
-            });
+            }).catch((err) => console.log(err));
             menu.create({
               title: 'События',
               link: 'events',
               position: 20
-            });
+            }).catch((err) => console.log(err));
             menu.create({
               title: 'Справочник',
               link: 'directory',
               position: 30
-            });
+            }).catch((err) => console.log(err));
         }
       })
       .catch((err) => console.log(err));

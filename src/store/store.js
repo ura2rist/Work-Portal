@@ -47,7 +47,7 @@ export default class Store {
 
   async checkAuth() {
     try {
-      const response = await axios.get(`https://94.228.124.130:433/admin/refresh`, { withCredentials: true });
+      const response = await axios.get(`https://localhost:433/admin/refresh`, { withCredentials: true });
       localStorage.setItem('token', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
