@@ -33,6 +33,7 @@
 <p>На сервере открываем в текстовом редакторе файл /etc/apache2/sites-enabled/000-default.conf</p>
 <p>Внутри VirtualHost добавляем следующую запись:</p>
 <pre>
+<code>
 <Directory "/var/www/html">
 
     RewriteEngine On
@@ -43,7 +44,8 @@
 
     Options -Indexes
 
-  </Directory>
+</Directory>
+</code>
 </pre>
 <p></p>
 <p></p>
