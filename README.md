@@ -52,9 +52,9 @@
 &lt;/Location>  
 
 &lt;Location "/backend/">
-    AllowOverride None
-    Order Deny,Allow
-    Deny from All
+    AllowOverride None  
+    Order Deny,Allow  
+    Deny from All  
     Allow from 10.10.10.10
 &lt;/Location>
 </pre>
