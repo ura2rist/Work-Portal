@@ -32,7 +32,6 @@
 <h3 align="center">Шаг 7. Настройка apache</h3>
 <p>На сервере открываем в текстовом редакторе файл /etc/apache2/sites-enabled/000-default.conf</p>
 <p>Внутри VirtualHost добавляем следующую запись:</p>
-<pre>
 <code>
 <Directory "/var/www/html">
 
@@ -46,7 +45,6 @@
 
 </Directory>
 </code>
-</pre>
 <p></p>
 <p></p>
 <p></p>
