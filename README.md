@@ -32,8 +32,8 @@
 <h3 align="center">Шаг 7. Настройка apache</h3>
 <p>На сервере открываем в текстовом редакторе файл /etc/apache2/sites-enabled/000-default.conf</p>
 <p>Внутри VirtualHost добавляем следующую запись:</p>
-<code>
-<Directory "/var/www/html">
+<pre>
+&lt;Directory "/var/www/html">
 
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -43,8 +43,8 @@
 
     Options -Indexes
 
-</Directory>
-</code>
+&lt;/Directory>
+</pre>
 <p></p>
 <p></p>
 <p></p>
