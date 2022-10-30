@@ -51,7 +51,7 @@
     Allow from All  
 &lt;/Location>  
 
-&lt;Location "/backend/">  
+&lt;Location "/backend/">
     AllowOverride None
     Order Deny,Allow
     Deny from All
