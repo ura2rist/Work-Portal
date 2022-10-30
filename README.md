@@ -23,7 +23,7 @@
 <p>В ftp клиенте переходим в папку /var/www/html и загружаем на сервер папку backend</p>
 <p>В ftp клиенте переходим в папку backend и открываем файл config.js</p>
 <p>Изменяем имя пользователя и пароль на те, что указывали при создании пользователя. Меняем секретные слова для jwt токенов</p>
-<p>Возвращяемся к терминалу, переходим в папку /var/www/html/backend и пишем npm i - загружаем зависимости</p>
+<p>Возвращаемся к терминалу, переходим в папку /var/www/html/backend и пишем npm i - загружаем зависимости</p>
 <h3 align="center">Шаг 6. Настройка frontend</h3>
 <p>Переходим в папку на пк где лежит наш загруженный репозиторий, открываем терминал и пишем npm i - загружаем зависимости, на вашем пк должен быть установлен node.js</p>
 <p>Переходим там же в папку src, в папке api файл fetchApi.js и http файл index.js меняем адрес нашего сервера</p>
@@ -34,20 +34,36 @@
 <p>Внутри VirtualHost добавляем следующую запись:</p>
 <pre>
 &lt;Directory "/var/www/html">
-
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
     RewriteRule ^ index.html [L]
-
     Options -Indexes
-
 &lt;/Directory>
 </pre>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
+<p>Данные правила позволят избежать 404 ошибки при обновлении страницы и запретят показывать список файлов пользователю</p>
+<p>Под Directory добавляем еще правила</p>
+<pre>
+&lt;Location "/backend/public">  
+    AllowOverride None  
+    Order Allow,Deny  
+    Allow from All  
+&lt;/Location>  
+
+&lt;Location "/backend/">  
+    AllowOverride None  
+    Order Deny,Allow  
+    Deny from All  
+    Allow from 10.10.10.10   
+&lt;/Location>
+</pre>
+<p>Эти правила запретят пользователю просматривать файлы через браузер</p>
+<p>Затем в терминале сервера пишем a2enmod rewrite </p>
+<p>И перезапускаем apache командой service apache2 restart</p>
+<h3 align="center">Шаг 7. Настройка и установка pm2</h3>
+<p>npm install pm2 -g - установка пакета pm2 глобально</p>
+<p>pm2 start index.js - запуск нашего backend</p>
+<p>pm2 startup - генерация сценария запуска</p>
+<p>pm2 save - сохранение списка приложений</p>
+<p>Последние 2 шага сделаны для того, что бы приложение автоматически поднималось когда сервер перезапускается</p>
