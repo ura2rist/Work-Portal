@@ -52,10 +52,10 @@
 &lt;/Location>  
 
 &lt;Location "/backend/">  
-    AllowOverride None  
-    Order Deny,Allow  
-    Deny from All  
-    Allow from 10.10.10.10   
+    AllowOverride None
+    Order Deny,Allow
+    Deny from All
+    Allow from 10.10.10.10
 &lt;/Location>
 </pre>
 <p>Эти правила запретят пользователю просматривать файлы через браузер</p>
