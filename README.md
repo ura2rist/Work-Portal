@@ -3,7 +3,7 @@
 <h3 align="center">Шаг 1. Установка и настройка mysql</h3>
 <p>Заходим в терминал сервера и вводим команды:</p>
 <p>apt-get update - синхронизируем список пакетов</p>
-<p>sudo apt-get install mysql-server - установка mysql</p>
+<p>apt-get install mysql-server - установка mysql</p>
 <p>mysql_secure_installation - настройка mysql</p>
 <p>mysql - войти в терминал mysql</p>
 <p>Далее в терминале mysql вводим:</p>
