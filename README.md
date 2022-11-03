@@ -17,7 +17,7 @@
 <h3 align="center">Шаг 2. Установка curl</h3>
 <p>apt-get install curl - установка пакета curl</p>
 <h3 align="center">Шаг 3. Установка node.js</h3>
-<p>curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh - загрузка скрипта, вместо 14 можно указать нужную вам версию</p>
+<p>curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh - загрузка скрипта</p>
 <p>bash nodesource_setup.sh - запуск скрипта</p>
 <p>apt-get install nodejs - установка node.js той версии, которую скачали</p>
 <h3 align="center">Шаг 4. Установка apache</h3>

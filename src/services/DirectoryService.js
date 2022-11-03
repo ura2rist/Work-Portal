@@ -1,7 +1,7 @@
 import $api from '../http';
 
 export default class DirectoryService {
-  static addCategory(title) {
+  	static addCategory(title) {
 		return $api.post('/addcategory', { title });
 	}  
 
