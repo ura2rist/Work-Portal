@@ -64,7 +64,7 @@ Allow from 10.10.10.10
 <p>Эти правила запретят пользователю просматривать файлы через браузер</p>
 <p>Затем в терминале сервера пишем a2enmod rewrite </p>
 <p>И перезапускаем apache командой service apache2 restart</p>
-<h3 align="center">Шаг 7. Настройка и установка pm2</h3>
+<h3 align="center">Шаг 8. Настройка и установка pm2</h3>
 <p>npm install pm2 -g - установка пакета pm2 глобально</p>
 <p>pm2 start index.js - запуск нашего backend</p>
 <p>pm2 startup - генерация сценария запуска</p>
